@@ -1,0 +1,38 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.afterlaunch/agentic-growth-marketing",
+  "title": "AfterLaunch: the agentic growth marketing engine",
+  "description": "Growth marketing, SEO and GEO as agent tools: ranked moves, ship them, AI answer visibility.",
+  "version": "1.0.0",
+  "websiteUrl": "https://afterlaunch.io",
+  "repository": {
+    "url": "https://github.com/afterlaunch/mcp",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://afterlaunch.io/brand/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://afterlaunch.io/api/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer <AfterLaunch API key>. Mint one at https://afterlaunch.io/app/settings/api, or have your agent run the onboarding flow described at https://afterlaunch.io/llms.txt.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "com.github.serverDisplayName": "AfterLaunch"
+    }
+  }
+}

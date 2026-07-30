@@ -1,0 +1,11 @@
+{
+  "name": "afterlaunch-growth",
+  "description": "Growth marketing, SEO and AI answer-engine visibility (GEO) for a product, run through AfterLaunch over MCP. Bundles the AfterLaunch remote MCP server and a skill that teaches an agent to read the ranked Feed and ship prepared growth moves instead of improvising.",
+  "version": "1.0.0",
+  "author": {
+    "name": "AfterLaunch",
+    "url": "https://afterlaunch.io"
+  },
+  "homepage": "https://afterlaunch.io",
+  "license": "MIT"
+}

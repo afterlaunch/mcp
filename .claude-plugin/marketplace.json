@@ -1,0 +1,15 @@
+{
+  "name": "afterlaunch",
+  "description": "AfterLaunch: growth marketing, SEO and AI answer-engine visibility for your product, run by your agent over MCP.",
+  "owner": {
+    "name": "AfterLaunch",
+    "url": "https://afterlaunch.io"
+  },
+  "plugins": [
+    {
+      "name": "afterlaunch-growth",
+      "source": "./",
+      "description": "Run growth marketing, SEO and AI answer-engine visibility for a product through AfterLaunch over MCP. Reads a ranked backlog of prepared, ready-to-ship growth moves."
+    }
+  ]
+}
