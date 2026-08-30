@@ -45,8 +45,10 @@ scopes. If it succeeds, the install is complete.
 ## 4. What to do next
 
 Read `skills/afterlaunch-growth/SKILL.md` in this repository. It teaches the
-loop: confirm with `whoami`,
-read the Feed with `list_feed` before improvising, act on moves with
-`ship_move` / `skip_move` / `update_draft` / `archive_move`, and confirm with
-the founder before any tool that spends money (`refresh_scan`, `replenish_feed`,
-`run_loop`).
+loop: confirm with `whoami`, open the session with `get_standup`, pull the
+moves the founder has already said yes to with `list_queue` (claim each with
+`pick_up_job`, report with `report_job`), read the board with `list_feed` and
+`get_move` before improvising, act on moves with `ship_move` / `skip_move` /
+`undo_move` / `update_draft` / `archive_move`, write what you learn back with
+`record_insight`, and confirm with the founder before any tool that spends
+money (`refresh_scan`, `replenish_feed`, `run_loop`).

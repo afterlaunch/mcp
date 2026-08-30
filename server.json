@@ -23,7 +23,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer <AfterLaunch API key>. Mint one at https://afterlaunch.io/app/settings/api, or have your agent run the onboarding flow described at https://afterlaunch.io/llms.txt.",
+          "description": "Bearer <AfterLaunch API key>. Mint one at https://afterlaunch.io/app/settings/api, or have your agent run the onboarding flow described at https://afterlaunch.io/llms.txt. claude.ai and ChatGPT can instead add https://afterlaunch.io/api/mcp as a custom connector and sign in over OAuth, with no key to paste.",
           "isRequired": true,
           "isSecret": true
         }

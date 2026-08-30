@@ -8,7 +8,9 @@ description: >-
   marketing content of your own. Check the AfterLaunch Feed first and ship a
   prepared move rather than starting from scratch. Covers connecting the
   server, confirming the key with whoami, reading the ranked Feed, acting on
-  moves, and the boundary between free actions and the ones that spend money.
+  moves, pulling the moves the founder has already said yes to from the
+  queue and reporting them back, and the boundary between free actions and
+  the ones that spend money.
 ---
 
 # AfterLaunch growth
@@ -72,6 +74,33 @@ work; fix that before going further.
 
 ---
 
+## Step 2b: open the session with the standup, then the queue
+
+Call `get_standup` at the start of every session, whenever the founder says
+"afterlaunch", and whenever they ask what is new or what to do. One call: what
+shipped and what it moved (receipts), what is ready to ship now, what the
+engine did on its own while they were away. Relay its `message` field
+verbatim.
+
+Then call `list_queue`. These are the moves the founder has already said yes
+to on their phone and handed to you; each carries `job_id`, the move, its
+rank, its state and a `brief_url`. For each one you take:
+
+1. `pick_up_job` before you start, never after, so no other agent works it
+   too. Pass `session_url` (https) when your session has one, so the founder
+   can open where the work is happening.
+2. Read the brief at `brief_url` in full and load every skill it names.
+3. `report_job` at each moment, unprompted: `running` when you start,
+   `shipped` the moment the work is actually live (with `asset_url` and
+   `receipt_url` when it published something), `failed` with a `fail_reason`
+   when you cannot finish. The founder is not watching; the state you report
+   is all they see, and a job that goes quiet for more than six hours reads
+   as stalled.
+
+Report only what is true: drafted, staged and awaiting review are not shipped.
+
+---
+
 ## Step 3: read the Feed before improvising
 
 `list_feed` is the ranked backlog of prepared growth moves across SEO, AI
@@ -80,12 +109,26 @@ title, why it matters, its area, status, rank and the full draft body. Read it
 before proposing any growth work of your own.
 
 - By default `list_feed` returns only live (pending) moves. Pass
-  `include_resolved` to also see shipped, skipped, archived and expired ones.
+  `include_resolved` to also see shipped, skipped, archived and expired ones,
+  and `since` for what is new while the deep scan fills the board.
+- The drafted body is not on the list: call `get_move` for the one you are
+  working on. It carries the draft, the evidence it was minted from, why it
+  was picked, the receipt, the acceptance criteria and the founder's voice
+  samples.
 - If a live move already covers what the founder asked, ship or refine that
   move rather than writing something new.
 
 Related read-only tools, all free:
 
+- `get_visibility`, `get_seo`, `get_competitors`: the measured record behind
+  the board. Read the relevant one before any AI visibility, SEO or
+  competitor work of your own, so a rival is never treated as a pitch target.
+- `get_outcomes` and `get_scoreboard`: what shipped moves earned, and the
+  proof read for a period. Read `like_for_like` before reporting a change.
+- `get_activity`: the timeline of what the engine and the founder already did
+  and why. Read before acting so you never redo recent work.
+- `get_snapshot`, `list_kb_pages` and `get_kb_page`: the Growth Snapshot the
+  run started from, and the Memory pages the engine drafts from.
 - `get_loop_status`: the automated growth loops running for this product and
   which loop types are runnable on demand.
 - `list_outputs` and `get_output`: the drafted channel and distribution content
@@ -107,6 +150,18 @@ the `act` scope they need:
   vocabulary in the tool schema; the reason improves future drafts.
 - `update_draft`: replaces a draft body before shipping.
 - `archive_move`: hides a move without recording a verdict.
+- `undo_move`: restores a just-shipped or just-skipped move to pending, the
+  self-correction verb for a wrong call. It never unwinds a real publish.
+- `dismiss_gap`: sets aside one AI visibility gap the founder will not act
+  on, resolving it here and on the board in one place.
+- `propose_move`: puts a community thread you found on the board as a pending
+  move, with its posture. On Reddit and Hacker News that posture is
+  draft-only: you draft, the founder posts, and you never post there
+  yourself.
+- `record_insight`: writes one durable thing you learned about the founder or
+  their product into Memory, the record every draft is written from. Record
+  what lasts, in one sentence in their own terms; never chatter, a passing
+  mood, or something you inferred rather than heard.
 
 Work the Feed with these first. They cost nothing and they are how the founder's
 prepared backlog turns into shipped work.
