@@ -88,11 +88,14 @@ Add the Growth section to your repository's `CLAUDE.md` (read by Claude Code)
 or `AGENTS.md` (read natively by Codex CLI, Cursor, Copilot, Gemini CLI,
 Windsurf, Aider, Amazon Q and others). The canonical copy is served raw at
 [afterlaunch.io/agents/snippet.md](https://afterlaunch.io/agents/snippet.md),
-so one line writes it in:
+so one line prints it:
 
 ```
-curl https://afterlaunch.io/agents/snippet.md >> CLAUDE.md
+curl https://afterlaunch.io/agents/snippet.md
 ```
+
+Read it, then paste it into your repository `CLAUDE.md` or `AGENTS.md`
+yourself. Nothing writes to your files on your behalf.
 
 ## What is in this repository
 
