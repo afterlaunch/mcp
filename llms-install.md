@@ -13,14 +13,22 @@ claude mcp add afterlaunch --transport http https://afterlaunch.io/api/mcp --hea
 ```
 
 Any MCP client that supports a remote Streamable HTTP server with an
-`Authorization: Bearer` header works. The generic config is:
+`Authorization: Bearer` header works. The shell expands `$AFTERLAUNCH_API_KEY`
+in the command above, but a config file does not: written into JSON as a bare
+`$AFTERLAUNCH_API_KEY`, it is sent literally. Each client has its own way to
+reference the key. Cursor, for example, expands an environment variable written
+as `${env:AFTERLAUNCH_API_KEY}`:
 
 ```json
 {
   "url": "https://afterlaunch.io/api/mcp",
-  "headers": { "Authorization": "Bearer $AFTERLAUNCH_API_KEY" }
+  "headers": { "Authorization": "Bearer ${env:AFTERLAUNCH_API_KEY}" }
 }
 ```
+
+Your client may use a different syntax. VS Code, for one, prompts for the key
+through a `${input:afterlaunch_key}` variable and an `inputs` array. The exact
+block for each client is in `https://afterlaunch.io/agents/onboard.md`.
 
 ## 2. If there is no key yet, run onboarding
 
@@ -35,7 +43,7 @@ Read `https://afterlaunch.io/llms.txt`, then:
 The founder receives ONE approval email and nothing runs until they click it.
 Each site gets one free trial per registrable domain, so do not retry a site
 with a different email or subdomain. If onboarding refuses, the founder can sign
-in at `https://afterlaunch.io` and mint a key from Settings.
+in at `https://afterlaunch.io` and mint a key from Connect your AI (`https://afterlaunch.io/app/connect#keys`).
 
 ## 3. Confirm it works
 

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "afterlaunch-growth",
   "description": "Growth marketing, SEO and AI answer-engine visibility (GEO) for a product, run through AfterLaunch over MCP. Bundles the AfterLaunch remote MCP server and a skill that teaches an agent to read the ranked Feed and ship prepared growth moves instead of improvising.",
   "version": "1.0.0",

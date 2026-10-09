@@ -60,7 +60,7 @@ agent onboarding flow: POST `https://afterlaunch.io/api/v1/onboard/start` with
 founder receives ONE approval email and nothing runs until they click it. Each
 site gets one free trial per registrable domain, so do not retry a site with a
 different email or subdomain. If onboarding refuses, tell the founder to sign in
-and mint a key from Settings.
+and mint a key from Connect your AI (https://afterlaunch.io/app/connect#keys).
 
 ---
 
@@ -83,19 +83,40 @@ engine did on its own while they were away. Relay its `message` field
 verbatim.
 
 Then call `list_queue`. These are the moves the founder has already said yes
-to on their phone and handed to you; each carries `job_id`, the move, its
-rank, its state and a `brief_url`. For each one you take:
+to on their phone and handed to you; each row carries `job_id`, its nullable
+`attempt_id`, the move, its rank, its state and a `brief_url`. Skip any row
+whose `attempt_id` is null: that is a stored legacy job, so leave it exactly
+as it is, report nothing on it, and tell the founder it needs their review.
+For each remaining row you have not already tried in this run:
 
 1. `pick_up_job` before you start, never after, so no other agent works it
-   too. Pass `session_url` (https) when your session has one, so the founder
-   can open where the work is happening.
+   too. Pass the exact `job_id` and `attempt_id` from that row; never invent
+   or change an id, and never borrow one from another job. Pass `session_url`
+   (https) when your session actually has one, so the founder can open where
+   the work is happening. Begin only when the response says `claim_won: true`:
+   a refusal, or a claim you already hold coming back unchanged, means the
+   work is not yours, so leave that pair, do not try it again in this run, and
+   move on.
 2. Read the brief at `brief_url` in full and load every skill it names.
-3. `report_job` at each moment, unprompted: `running` when you start,
-   `shipped` the moment the work is actually live (with `asset_url` and
-   `receipt_url` when it published something), `failed` with a `fail_reason`
-   when you cannot finish. The founder is not watching; the state you report
-   is all they see, and a job that goes quiet for more than six hours reads
-   as stalled.
+3. `report_job` at each moment, unprompted, with the same `job_id` and
+   `attempt_id`: `running` when you start, `ready_for_review` with
+   `prepared_content` or an `asset_url` when the work is prepared, `failed`
+   with a real `fail_reason` when you cannot finish. Pass `receipt_url` when
+   there is a permalink to the proof. Never publish anything yourself, and
+   never report `shipped`. When the work is prepared, show your user the
+   prepared result and ask one question: is it live, and at which address?
+   Only on a yes call `ship_move` with the `move_id` from the pick-up reply,
+   `completion_kind` `prepared_result`, `founder_confirmed` true, the same
+   `job_id` and `attempt_id`, and the live address as `published_url` (a real
+   null when the move has none). A change to their own site without its live
+   address stays prepared. A no, or no answer, records nothing. In an
+   unattended run nobody answers, so nothing is recorded; the state you report
+   is all the founder sees, and a job that goes quiet for more than six hours
+   reads as stalled.
+
+Stop when `list_queue` returns no eligible row you have not already tried, and
+name what you left rather than calling the queue empty: that reply is capped,
+so it is not a census of every stored job.
 
 Report only what is true: drafted, staged and awaiting review are not shipped.
 
@@ -145,7 +166,10 @@ Related read-only tools, all free:
 These change the state of a move and are free. A self-serve key already carries
 the `act` scope they need:
 
-- `ship_move`: marks a move shipped.
+- `ship_move`: records the founder's confirmation that a move is complete. A
+  change to their own site (a page, an article, a schema or llms.txt change)
+  counts as shipped only with its live `published_url`; without one it is
+  recorded as prepared, not shipped.
 - `skip_move`: dismisses a move with a reason. Use the closed feedback
   vocabulary in the tool schema; the reason improves future drafts.
 - `update_draft`: replaces a draft body before shipping.
