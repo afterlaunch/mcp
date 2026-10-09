@@ -9,8 +9,8 @@ description: >-
   prepared move rather than starting from scratch. Covers connecting the
   server, confirming the key with whoami, reading the ranked Feed, acting on
   moves, pulling the moves the founder has already said yes to from the
-  queue and reporting them back, and the boundary between free actions and
-  the ones that spend money.
+  queue, shipping them and reporting them shipped with the live address, and
+  the boundary between free actions and the ones that spend money.
 ---
 
 # AfterLaunch growth
@@ -98,21 +98,36 @@ For each remaining row you have not already tried in this run:
    work is not yours, so leave that pair, do not try it again in this run, and
    move on.
 2. Read the brief at `brief_url` in full and load every skill it names.
-3. `report_job` at each moment, unprompted, with the same `job_id` and
-   `attempt_id`: `running` when you start, `ready_for_review` with
-   `prepared_content` or an `asset_url` when the work is prepared, `failed`
-   with a real `fail_reason` when you cannot finish. Pass `receipt_url` when
-   there is a permalink to the proof. Never publish anything yourself, and
-   never report `shipped`. When the work is prepared, show your user the
-   prepared result and ask one question: is it live, and at which address?
-   Only on a yes call `ship_move` with the `move_id` from the pick-up reply,
-   `completion_kind` `prepared_result`, `founder_confirmed` true, the same
-   `job_id` and `attempt_id`, and the live address as `published_url` (a real
-   null when the move has none). A change to their own site without its live
-   address stays prepared. A no, or no answer, records nothing. In an
-   unattended run nobody answers, so nothing is recorded; the state you report
-   is all the founder sees, and a job that goes quiet for more than six hours
-   reads as stalled.
+3. Ship it. You were handed this move because your user chose it. Work out
+   how to ship it with what you know about them: their repository, their
+   accounts and their tools. Call `report_job` at each moment, unprompted,
+   with the same `job_id` and `attempt_id`: `running` when you start, then do
+   the work.
+   - Ask your user at most one question, here in your own thread, and only
+     when you cannot ship without the answer. When you ask it, call
+     `report_job` with state `needs_input` and the `question` in at most 500
+     characters, then wait for their reply here. When they answer, report
+     `running` and carry on.
+   - When it is live, report `shipped` with the live address as
+     `published_url`. A page on their own site that is not live yet goes as
+     `planned_url` instead, and stays prepared until that address answers.
+   - Respect each brief's posture: what goes out in your user's own name is
+     posted only when they authorise it with a yes in your thread to the
+     question "post this from your account?" If it has to go out from their
+     own account and you cannot post it, report `ready_for_review` with the
+     final text as `prepared_content` (or an `asset_url`) and say where it is.
+   - If your user posts that text themselves and tells you it is live, record
+     it: call `ship_move` with the `move_id` from the pick-up reply,
+     `completion_kind` `prepared_result`, `founder_confirmed` true, the same
+     `job_id` and `attempt_id`, and the live address as `published_url` (a
+     real null when the move has none).
+   - If you cannot finish, report `failed` with a real `fail_reason`.
+
+   Pass `receipt_url` when there is a permalink to the proof, and
+   `session_url` when you have a link to your own session, because your user
+   follows the work from it. Report only what is true: a draft is not
+   shipped. The state you report is all your user sees, and a job that goes
+   quiet for more than six hours reads as stalled.
 
 Stop when `list_queue` returns no eligible row you have not already tried, and
 name what you left rather than calling the queue empty: that reply is capped,
@@ -226,7 +241,7 @@ a loop, never speed it up past its default.
 ## Hard boundaries
 
 - **Never** claim AfterLaunch posted to a social channel on its own. It drafts;
-  a human approves and posts.
+  nothing goes out in your user's own name without their yes in your thread.
 - **Never** present a checkout link as a purchase you completed.
 - Read the Feed before writing growth content of your own.
 - Confirm before any money-spending tool call.

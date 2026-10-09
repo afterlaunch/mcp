@@ -71,7 +71,7 @@ carry the state back; the founder never watches it run.
 |---|---|
 | `list_queue` | Start of a session, and whenever they ask what is waiting on you. Each row carries `job_id`, its nullable `attempt_id`, the move, its rank, the state and `brief_url`. A null `attempt_id` is a stored legacy job: leave it alone, report nothing on it, and say it needs the founder's review. The reply is capped, so it is not a census of every stored job. |
 | `pick_up_job` | Before you start the work, never after, so no other agent works it too. Pass the exact `job_id` and `attempt_id` from the row; never invent or change an id, and never borrow one from another job. Pass `session_url` (https) when your session actually has one, so the founder can open where the work is happening. Begin only when the response says `claim_won: true`; a refusal, or a claim you already hold coming back unchanged, is not yours to start, so do not try that pair again in this run. Then read the brief at `brief_url` in full and load every skill it names. |
-| `report_job` | At each moment, unprompted, with the same `job_id` and `attempt_id`: `running` when you start, `ready_for_review` with `prepared_content` or an `asset_url` when the work is prepared, `failed` with a real `fail_reason` when you cannot finish. Pass `receipt_url` and `session_url` as they apply. Never publish anything yourself, and never report `shipped`. When the work is prepared, show your user the prepared result and ask one question: is it live, and at which address? Only on a yes call `ship_move` with the `move_id` from the pick-up reply, `completion_kind` `prepared_result`, `founder_confirmed` true, the same `job_id` and `attempt_id`, and the live address as `published_url` (a real null when the move has none). A change to their own site without its live address stays prepared. A no, or no answer, records nothing. A job quiet for more than six hours reads as stalled to the founder. |
+| `report_job` | At each moment, unprompted, with the same `job_id` and `attempt_id`. Your user chose this move, so you ship it: `running` when you start; `needs_input` with one `question` (at most 500 characters) asked in your own thread too, only when you cannot ship without the answer, then wait and report `running` again once they answer; `shipped` with the live address as `published_url` when it is live (`planned_url` for a page on their own site that is not live yet, which stays prepared until that address answers); `ready_for_review` with the final text as `prepared_content` or an `asset_url` when it has to go out from their own account and you cannot post it; `failed` with a real `fail_reason` when you cannot finish. What goes out in your user's own name is posted only on their yes in your thread to "post this from your account?" If they post the text themselves and tell you it is live, call `ship_move` with the `move_id` from the pick-up reply, `completion_kind` `prepared_result`, `founder_confirmed` true, the same `job_id` and `attempt_id`, and the live address as `published_url`. Pass `receipt_url` and `session_url` as they apply. A job quiet for more than six hours reads as stalled. |
 
 Report only what is true: drafted, staged and awaiting review are not shipped.
 
@@ -119,9 +119,11 @@ or channel. You never complete the consent yourself.
 
 ## Boundaries
 
-- Social and distribution content is always review-and-post by a human. On
-  Reddit and Hacker News you draft; the founder posts.
+- What goes out in your user's own name is posted only when they authorise it
+  with a yes in your thread to the question "post this from your account?" On
+  Reddit and Hacker News you draft; your user posts.
 - Read the standup, the queue and the Feed before improvising growth work.
 - Confirm before any tool that spends money.
-- Shipping is the founder's decision; reporting the ship is yours, and it is
-  not optional.
+- Your user makes the ship decision when they hand you a move: a job you
+  claimed from the queue is yours to ship, and reporting it shipped with its
+  live address is part of the job, every time.
