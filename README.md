@@ -130,7 +130,7 @@ Scopes: 26 tools need `read`, 23 need `act`, 3 need `write` and 3 need `config`.
 | Tool | Scope | What it does |
 |---|---|---|
 | `get_visibility` | read | How ChatGPT, Gemini, Perplexity and Google AI Overviews answer the tracked questions: share of voice, cited sources, gaps, trend. |
-| `list_tracked_prompts` | read | The customer questions every AI visibility reading is taken against (capped at 15). |
+| `list_tracked_prompts` | read | The customer questions every AI visibility reading is taken against (up to 50 on the Founder plan). |
 | `get_seo` | read | The site-wide SEO audit: issue groups by severity, weekly score trend, page performance, links and authority. |
 | `get_competitors` | read | The competitor roster with measured stats for you and each rival. |
 | `get_snapshot` | read | The Growth Snapshot the run started from: positioning, discoverability score, day-0 baselines. |
