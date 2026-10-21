@@ -1,7 +1,7 @@
 # AfterLaunch MCP tools, grouped by what they do and what they cost
 
-This reference mirrors the shipped action registry as of 9 October 2026: 59 tools
-in the registry, of which 55 are listed to an ordinary connection. The other four
+This reference mirrors the shipped action registry as of 22 October 2026: 62 tools
+in the registry, of which 58 are listed to an ordinary connection. The other four
 (`run_loop`, `set_loop_autonomy`, `set_loop_cadence`, `set_scan_config`) are listed
 only to an administrator account. The
 server is the source of truth: on connection, `tools/list` returns the live
@@ -104,7 +104,10 @@ or channel. You never complete the consent yourself.
 | Tool | Scope | What it does |
 |---|---|---|
 | `accept_move` | act | Accepts a move once the owner says yes and records one preparation attempt. A repeat never starts a second one. |
-| `review_move` | act | Applies one review decision: revise the current attempt, withdraw unfinished work, adopt an inspected legacy result or correct a recorded publication. Never publishes. |
+| `revise_move` | act | Starts a new preparation attempt in place of the current one, once your user asks for a revision. Never publishes. |
+| `withdraw_move` | act | Cancels unfinished work and returns the move to pending, once your user asks. Never publishes. |
+| `adopt_move_result` | act | Adopts an inspected legacy result (null attempt) as the move's prepared result, for your user's review. Never publishes. |
+| `correct_move_publication` | act | Archives a shipped move whose recorded publication your user says is wrong, keeping its history. Never publishes. |
 | `get_content_calendar` | read | The content calendar with source drafts and the current Board state. Saved words are not publication proof. |
 | `record_content` | act | Files a content idea, an original X draft or a research outcome on the calendar. No spend, no posting. |
 | `get_experiments` | read | Growth content experiments already run, newest first. Each is an observation, not a rate. |

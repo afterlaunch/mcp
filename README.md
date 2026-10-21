@@ -3,7 +3,7 @@
 AfterLaunch watches how AI search and Google find your product, and hands you the next growth move with a draft ready. This repository is the home of its remote MCP server: connect Claude, ChatGPT, Claude Code, Codex or Cursor and your own AI can read the ranked moves, check AI visibility, take a move through to shipped and report it live.
 
 - **Server URL:** `https://afterlaunch.io/api/mcp` (Streamable HTTP, nothing to install or run locally)
-- **Tools:** 55 (see the list below)
+- **Tools:** 58 (see the list below)
 - **Sign-in:** OAuth 2.0 for Claude and ChatGPT, or an API key for coding agents
 - **Cost:** the free scan and the first 14 days cost nothing and need no card; then one plan, $149 a month
 - **Licence:** MIT
@@ -105,9 +105,9 @@ The onboarding guide at [afterlaunch.io/agents/onboard.md](https://afterlaunch.i
 
 ## Tools
 
-55 tools, read from the product's action registry on 9 October 2026. The registry holds four more (`run_loop`, `set_loop_autonomy`, `set_loop_cadence`, `set_scan_config`), but they are listed only to an administrator account, so an ordinary connection does not see them. The live catalogue with exact input schemas is `tools/list` on connection, and the one-page reference in this repository is [`skills/afterlaunch-growth/reference/tools.md`](skills/afterlaunch-growth/reference/tools.md).
+58 tools, read from the product's action registry on 22 October 2026. The registry holds four more (`run_loop`, `set_loop_autonomy`, `set_loop_cadence`, `set_scan_config`), but they are listed only to an administrator account, so an ordinary connection does not see them. The live catalogue with exact input schemas is `tools/list` on connection, and the one-page reference in this repository is [`skills/afterlaunch-growth/reference/tools.md`](skills/afterlaunch-growth/reference/tools.md).
 
-Scopes: 26 tools need `read`, 23 need `act`, 3 need `write` and 3 need `config`.
+Scopes: 26 tools need `read`, 26 need `act`, 3 need `write` and 3 need `config`.
 
 ### Start a session
 
@@ -148,7 +148,10 @@ Scopes: 26 tools need `read`, 23 need `act`, 3 need `write` and 3 need `config`.
 | `accept_move` | act | Accepts a move once the owner says yes and records one preparation attempt. |
 | `update_draft` | act | Replaces a pending move's draft body before it ships. |
 | `ship_move` | act | Records that the work is live, after the owner confirms. It records; it never publishes. |
-| `review_move` | act | Applies one review decision: revise, withdraw, adopt a legacy result or correct a recorded publication. |
+| `revise_move` | act | Starts a new preparation attempt in place of the current one, once the owner asks for a revision. Never publishes. |
+| `withdraw_move` | act | Cancels unfinished work and returns the move to pending, once the owner asks. Never publishes. |
+| `adopt_move_result` | act | Adopts work prepared before attempt tracking as the move's prepared result, for the owner's review. Never publishes. |
+| `correct_move_publication` | act | Archives a shipped move whose recorded publication the owner says is wrong, keeping its history. Never publishes. |
 | `skip_move` | act | Dismisses a move with a reason from a closed list, which improves later drafts. |
 | `archive_move` | act | Hides a move without recording a verdict. |
 | `undo_move` | act | Restores a just-shipped or just-skipped move to pending. |
@@ -206,8 +209,8 @@ Scopes: 26 tools need `read`, 23 need `act`, 3 need `write` and 3 need `config`.
 
 | Tool | Scope | What it does |
 |---|---|---|
-| `create_checkout` | act | Creates a checkout link for the paid plan. The owner pays; the agent never does. |
-| `create_topup` | act | Creates a credit top-up checkout link (paid plan only). |
+| `create_checkout` | act | Only creates a hosted checkout link for the paid plan. It takes no payment details and charges nothing; the owner pays on the checkout page in their own browser. |
+| `create_topup` | act | Only creates a hosted credit top-up checkout link (paid plan only). It takes no payment details and charges nothing; the owner pays on the checkout page in their own browser. |
 ## Authentication
 
 - **OAuth 2.0** for Claude and ChatGPT custom connectors. You sign in with your AfterLaunch account and approve. Discovery starts at `https://afterlaunch.io/.well-known/oauth-protected-resource/api/mcp`. The scopes are `read`, `act` and `write`.
