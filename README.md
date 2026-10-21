@@ -21,6 +21,16 @@ The Cursor button opens Cursor's own confirmation screen with the server filled 
 
 A good first session is two calls: `whoami` to confirm which product the key drives, then `get_standup` for what shipped, what is ready now and what the engine did on its own.
 
+## Get started
+
+Run this in your own terminal:
+
+```
+npx afterlaunch connect
+```
+
+It finds your client, takes your key or creates your account, writes the config and tells you to restart. It covers Claude Code, Codex, Cursor, Windsurf, Gemini CLI and VS Code, and the key never passes through a chat. The steps below are the manual path.
+
 ## Connect in one minute
 
 You need a scanned product first. Run the free scan at [afterlaunch.io](https://afterlaunch.io), because connecting needs a scanned product. The server URL is the same everywhere:
@@ -49,13 +59,13 @@ You sign in with your AfterLaunch account, so there is no key to create. Add it 
 
 ### Claude Code
 
-Create an API key at [afterlaunch.io/app/connect#keys](https://afterlaunch.io/app/connect#keys), export it in your shell as `AFTERLAUNCH_API_KEY`, then run:
+Create an API key at [afterlaunch.io/app/connect#keys](https://afterlaunch.io/app/connect#keys), then run:
 
 ```sh
-claude mcp add afterlaunch --transport http https://afterlaunch.io/api/mcp --header "Authorization: Bearer $AFTERLAUNCH_API_KEY"
+claude mcp add afterlaunch --scope user --transport http https://afterlaunch.io/api/mcp --header "Authorization: Bearer YOUR_AFTERLAUNCH_API_KEY"
 ```
 
-The command reads the key from your environment, so it is never written into the command itself. Or install the plugin from this repository, which bundles the server config and a skill that teaches the agent to read the standup, the queue and the Feed before improvising growth work:
+Replace YOUR_AFTERLAUNCH_API_KEY with the key. It goes into your private user config (`~/.claude.json`), outside every repository, so it is never committed. Or install the plugin from this repository, which bundles the server config and a skill that teaches the agent to read the standup, the queue and the Feed before improvising growth work:
 
 ```
 /plugin marketplace add afterlaunch/mcp

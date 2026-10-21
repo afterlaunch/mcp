@@ -49,17 +49,23 @@ process and nothing to execute on the machine; it authenticates with a bearer
 key. Connect it once per environment:
 
 ```
-claude mcp add afterlaunch --transport http https://afterlaunch.io/api/mcp --header "Authorization: Bearer $AFTERLAUNCH_API_KEY"
+claude mcp add afterlaunch --scope user --transport http https://afterlaunch.io/api/mcp --header "Authorization: Bearer YOUR_AFTERLAUNCH_API_KEY"
 ```
+
+Replace YOUR_AFTERLAUNCH_API_KEY with the key. It goes into the private user
+config (~/.claude.json), outside every repository, so it is never committed.
+Then run `claude mcp list` (AfterLaunch should read Connected) and restart
+Claude Code before calling its tools.
 
 If there is no key yet, read `https://afterlaunch.io/llms.txt` and run the
 agent onboarding flow: POST `https://afterlaunch.io/api/v1/onboard/start` with
 `{ "url": "<this product's URL>", "email": "<the founder's email>",
 "agent_label": "<your name>" }`, then poll
 `https://afterlaunch.io/api/v1/onboard/poll` with the returned device code. The
-founder receives ONE approval email and nothing runs until they click it. Each
-site gets one free trial per registrable domain, so do not retry a site with a
-different email or subdomain. If onboarding refuses, tell the founder to sign in
+founder receives ONE approval email and nothing runs until they click it. There
+is one free trial per email address: do not retry a site with a different email
+for the same person (a colleague may onboard the same site). If onboarding
+refuses, tell the founder to sign in
 and mint a key from Connect your AI (https://afterlaunch.io/app/connect#keys).
 
 ---
@@ -146,7 +152,7 @@ before proposing any growth work of your own.
 
 - By default `list_feed` returns only live (pending) moves. Pass
   `include_resolved` to also see shipped, skipped, archived and expired ones,
-  and `since` for what is new while the deep scan fills the board.
+  and `since` for what is new while the deep scan fills the moves list.
 - The drafted body is not on the list: call `get_move` for the one you are
   working on. It carries the draft, the evidence it was minted from, why it
   was picked, the receipt, the acceptance criteria and the founder's voice
@@ -157,7 +163,7 @@ before proposing any growth work of your own.
 Related read-only tools, all free:
 
 - `get_visibility`, `get_seo`, `get_competitors`: the measured record behind
-  the board. Read the relevant one before any AI visibility, SEO or
+  your moves. Read the relevant one before any AI visibility, SEO or
   competitor work of your own, so a rival is never treated as a pitch target.
 - `get_outcomes` and `get_scoreboard`: what shipped moves earned, and the
   proof read for a period. Read `like_for_like` before reporting a change.
@@ -192,11 +198,13 @@ the `act` scope they need:
 - `undo_move`: restores a just-shipped or just-skipped move to pending, the
   self-correction verb for a wrong call. It never unwinds a real publish.
 - `dismiss_gap`: sets aside one AI visibility gap the founder will not act
-  on, resolving it here and on the board in one place.
-- `propose_move`: puts a community thread you found on the board as a pending
-  move, with its posture. On Reddit and Hacker News that posture is
-  draft-only: you draft, the founder posts, and you never post there
-  yourself.
+  on, resolving it here and on the moves list in one place.
+- `propose_move`: puts a community thread you found, or a move your user's
+  plan calls for (a placement ask, outreach, a directory listing, a page for
+  their site), on the moves list as a pending move, with its posture and the plan
+  channel it serves. On Reddit and Hacker News that posture is draft-only: you
+  draft, your user posts, and you never post there yourself. Outreach goes out
+  from their own address, never without their yes.
 - `record_insight`: writes one durable thing you learned about the founder or
   their product into Memory, the record every draft is written from. Record
   what lasts, in one sentence in their own terms; never chatter, a passing

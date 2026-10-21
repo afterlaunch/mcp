@@ -28,7 +28,7 @@ and replayed rather than rerun on a repeat.
 
 | Tool | What it returns |
 |---|---|
-| `list_feed` | The ranked board of prepared growth moves: title, why, area, status, rank, `has_draft`. Pass `include_resolved` for shipped, skipped, archived and expired; pass `since` for what is new. |
+| `list_feed` | The ranked list of prepared growth moves: title, why, area, status, rank, `has_draft`. Pass `include_resolved` for shipped, skipped, archived and expired; pass `since` for what is new. |
 | `get_move` | One move in full: the drafted body, the evidence it was minted from, the deliverable, why it was picked, the receipt, the acceptance criteria and the founder's voice samples. Read it before writing anything. |
 | `get_visibility` | How ChatGPT, Gemini, Perplexity and Google AI Overviews answer the tracked customer questions: share of voice, cited sources, competitor-owned gaps, trend, crawlability, off-site reach. `prompt_id` drills into one question. |
 | `get_seo` | The site-wide SEO audit: issue groups, weekly score trend, page performance, links and authority, day-0 ranks. `include_pages` for per-page detail. |
@@ -41,7 +41,7 @@ and replayed rather than rerun on a repeat.
 | `get_loop_status` | The automated loops provisioned for this product, their autonomy, and the loop types `run_loop` accepts. |
 | `list_outputs` / `get_output` | The drafted channel and distribution content, and any one body by id. |
 | `list_kb_pages` / `get_kb_page` | The Memory pages the engine drafts from, and any one body by slug. |
-| `list_tracked_prompts` | The customer questions every AI visibility measurement is taken against (hard cap of 15). |
+| `list_tracked_prompts` | The customer questions every AI visibility measurement is taken against (up to 50 on the Founder plan). |
 | `list_connections` | Which data sources and channels are connected (GA4, Search Console, Google Business Profile, LinkedIn, Reddit), each with an honest state. |
 | `poll_connection` | Did the founder finish a connection you handed them a link for? |
 | `get_setup_snippet` | The paste-able "Growth (AfterLaunch)" section for a repository's CLAUDE.md or AGENTS.md. |
@@ -55,8 +55,8 @@ and replayed rather than rerun on a repeat.
 | `undo_move` | Restores a just-shipped or just-skipped move to pending: the self-correction verb. Never unwinds a real channel publish. |
 | `update_draft` | Replaces a draft body before shipping. A draft with an unfilled placeholder or a broken link is refused. |
 | `archive_move` | Hides a move without recording a verdict. |
-| `dismiss_gap` | Sets aside one AI visibility gap the founder will not act on; resolves it here and on the board in one place. |
-| `propose_move` | Puts a community thread you found (a subreddit, Hacker News, a forum) on the board as a pending move, with its posture. On Reddit and Hacker News that posture is draft-only: you draft, the founder posts. |
+| `dismiss_gap` | Sets aside one AI visibility gap the founder will not act on; resolves it here and on the moves list in one place. |
+| `propose_move` | Puts a community thread you found (a subreddit, Hacker News, a forum), or a move your user's plan calls for (a placement ask, outreach, a directory listing, a page for their site), on the moves list as a pending move, with its posture and the plan channel it serves. On Reddit and Hacker News that posture is draft-only: you draft, your user posts. |
 | `record_insight` | Writes one durable thing you learned about the founder or their product into Memory, the record every draft is written from. Record what lasts, in one sentence; never chatter or inference. |
 | `set_output_status` / `redraft_output` | Resolve or replace a drafted channel output. Neither posts anywhere. Founder plan. |
 | `create_checkout` / `create_topup` | Return a checkout link bound to this product run. The founder pays; never present it as your purchase. |
