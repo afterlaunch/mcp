@@ -31,6 +31,29 @@ npx afterlaunch connect
 
 It finds your client, takes your key or creates your account, writes the config and tells you to restart. It covers Claude Code, Codex, Cursor, Windsurf, Gemini CLI and VS Code, and the key never passes through a chat. The steps below are the manual path.
 
+## Install the plugin
+
+The plugin bundles the server config and three skills: `afterlaunch-growth`, which teaches the agent to read the standup, the queue and the Feed before improvising growth work, plus `roughen` and `findable` from [afterlaunch/skills](https://github.com/afterlaunch/skills). Create an API key first at [afterlaunch.io/app/connect#keys](https://afterlaunch.io/app/connect#keys), or run `npx afterlaunch connect`.
+
+### Install in Claude Code
+
+```
+/plugin marketplace add afterlaunch/mcp
+/plugin install afterlaunch-growth@afterlaunch
+```
+
+When you enable the plugin, Claude Code asks for your AfterLaunch API key. It masks the field and keeps the key in your system's secure credential store, not in a settings file, and sends it only as the bearer header to `https://afterlaunch.io/api/mcp`.
+
+### Install in Cursor
+
+Install AfterLaunch Growth from the Cursor Marketplace, then set `AFTERLAUNCH_API_KEY` under Plugins, Configure on the plugin. The plugin's `mcp.json` holds only the `${AFTERLAUNCH_API_KEY}` placeholder, never the key. To use the server without the plugin, use the install button above or the manual config under Cursor below.
+
+For the manual configs below (Cursor and Codex), export the key in your shell before you open the client:
+
+```sh
+export AFTERLAUNCH_API_KEY=al_your_key_here
+```
+
 ## Connect in one minute
 
 You need a scanned product first. Run the free scan at [afterlaunch.io](https://afterlaunch.io), because connecting needs a scanned product. The server URL is the same everywhere:
@@ -65,12 +88,7 @@ Create an API key at [afterlaunch.io/app/connect#keys](https://afterlaunch.io/ap
 claude mcp add afterlaunch --scope user --transport http https://afterlaunch.io/api/mcp --header "Authorization: Bearer YOUR_AFTERLAUNCH_API_KEY"
 ```
 
-Replace YOUR_AFTERLAUNCH_API_KEY with the key. It goes into your private user config (`~/.claude.json`), outside every repository, so it is never committed. Or install the plugin from this repository, which bundles the server config and a skill that teaches the agent to read the standup, the queue and the Feed before improvising growth work:
-
-```
-/plugin marketplace add afterlaunch/mcp
-/plugin install afterlaunch-growth@afterlaunch
-```
+Replace YOUR_AFTERLAUNCH_API_KEY with the key. It goes into your private user config (`~/.claude.json`), outside every repository, so it is never committed. Or [install the plugin](#install-in-claude-code), which asks for the key itself.
 
 ### Codex
 
@@ -279,9 +297,12 @@ Read it, then paste it into your file yourself. Nothing writes to your files on 
 
 ## What is in this repository
 
-- `.claude-plugin/`: the plugin marketplace and plugin manifests.
-- `.mcp.json`: the remote server config (URL plus bearer header read from your environment).
+- `.claude-plugin/`: the Claude plugin marketplace and plugin manifests.
+- `.mcp.json`: the Claude plugin's server config (URL plus bearer header filled from the key you enter when you enable the plugin).
+- `.cursor-plugin/plugin.json` and `mcp.json`: the Cursor plugin manifest and its server config (URL plus bearer header filled from the `AFTERLAUNCH_API_KEY` variable).
 - `skills/afterlaunch-growth/`: the skill and its one-page tool reference.
+- `skills/roughen/` and `skills/findable/`: two skills copied from [afterlaunch/skills](https://github.com/afterlaunch/skills).
+- `THIRD_PARTY.md`: the notices for the MIT work `roughen` adapts.
 - `llms-install.md`: machine setup from that file alone.
 - `server.json`: the manifest published to the official MCP registry.
 - `glama.json`: the maintainer claim for the Glama listing.
