@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "afterlaunch": {
+      "url": "https://afterlaunch.io/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${AFTERLAUNCH_API_KEY}"
+      }
+    }
+  }
+}

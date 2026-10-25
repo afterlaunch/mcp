@@ -1,12 +1,33 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "afterlaunch-growth",
-  "description": "Growth marketing, SEO and AI answer-engine visibility (GEO) for a product, run through AfterLaunch over MCP. Bundles the AfterLaunch remote MCP server and a skill that teaches an agent to read the ranked Feed and ship prepared growth moves instead of improvising.",
+  "description": "Growth marketing, SEO and AI answer-engine visibility (GEO) for a product, run through AfterLaunch over MCP. Bundles the AfterLaunch remote MCP server, a skill that teaches an agent to read the ranked Feed and ship prepared growth moves instead of improvising, and two writing and site skills (roughen, findable).",
   "version": "1.0.0",
   "author": {
     "name": "AfterLaunch",
     "url": "https://afterlaunch.io"
   },
   "homepage": "https://afterlaunch.io",
-  "license": "MIT"
+  "repository": "https://github.com/afterlaunch/mcp",
+  "license": "MIT",
+  "keywords": [
+    "marketing",
+    "seo",
+    "geo",
+    "ai-visibility",
+    "growth",
+    "mcp"
+  ],
+  "icon": "./assets/logo-400.png",
+  "privacyPolicyUrl": "https://afterlaunch.io/privacy",
+  "termsOfServiceUrl": "https://afterlaunch.io/terms",
+  "userConfig": {
+    "AFTERLAUNCH_API_KEY": {
+      "type": "string",
+      "title": "AfterLaunch API key",
+      "description": "Bearer key from npx afterlaunch connect or afterlaunch.io",
+      "required": true,
+      "sensitive": true
+    }
+  }
 }

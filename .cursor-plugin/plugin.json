@@ -1,0 +1,24 @@
+{
+  "name": "afterlaunch-growth",
+  "version": "1.0.0",
+  "description": "Growth marketing, SEO and AI answer-engine visibility (GEO) for your product, run through AfterLaunch over MCP, with skills that teach an agent to read the ranked Feed and ship prepared moves.",
+  "author": {
+    "name": "AfterLaunch"
+  },
+  "homepage": "https://afterlaunch.io",
+  "repository": "https://github.com/afterlaunch/mcp",
+  "license": "MIT",
+  "keywords": ["marketing", "seo", "geo", "ai-visibility", "growth", "mcp"],
+  "logo": "assets/logo-400.png",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "AFTERLAUNCH_API_KEY": {
+        "type": "string",
+        "title": "AfterLaunch API key",
+        "description": "Bearer key from npx afterlaunch connect or afterlaunch.io"
+      }
+    },
+    "required": ["AFTERLAUNCH_API_KEY"]
+  }
+}

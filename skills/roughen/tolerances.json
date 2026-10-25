@@ -1,0 +1,6 @@
+{
+  "apostrophe_drop": 0.33,
+  "lowercase": 0.16,
+  "typo_chance": 0.2,
+  "max_sentences_per_paragraph": 4
+}
