@@ -123,7 +123,7 @@ The onboarding guide at [afterlaunch.io/agents/onboard.md](https://afterlaunch.i
 
 ## Tools
 
-58 tools, read from the product's action registry on 22 October 2026. The registry holds four more (`run_loop`, `set_loop_autonomy`, `set_loop_cadence`, `set_scan_config`), but they are listed only to an administrator account, so an ordinary connection does not see them. The live catalogue with exact input schemas is `tools/list` on connection, and the one-page reference in this repository is [`skills/afterlaunch-growth/reference/tools.md`](skills/afterlaunch-growth/reference/tools.md).
+58 tools. The live catalogue with exact input schemas is `tools/list` on connection, and the one-page reference in this repository is [`skills/afterlaunch-growth/reference/tools.md`](skills/afterlaunch-growth/reference/tools.md).
 
 Scopes: 26 tools need `read`, 26 need `act`, 3 need `write` and 3 need `config`.
 
@@ -148,7 +148,7 @@ Scopes: 26 tools need `read`, 26 need `act`, 3 need `write` and 3 need `config`.
 | Tool | Scope | What it does |
 |---|---|---|
 | `get_visibility` | read | How ChatGPT, Gemini, Perplexity and Google AI Overviews answer the tracked questions: share of voice, cited sources, gaps, trend. |
-| `list_tracked_prompts` | read | The customer questions every AI visibility reading is taken against (up to 50 on the Founder plan). |
+| `list_tracked_prompts` | read | The customer questions every AI visibility reading is taken against (15 included, up to 50 on the Founder plan). |
 | `get_seo` | read | The site-wide SEO audit: issue groups by severity, weekly score trend, page performance, links and authority. |
 | `get_competitors` | read | The competitor roster with measured stats for you and each rival. |
 | `get_snapshot` | read | The Growth Snapshot the run started from: positioning, discoverability score, day-0 baselines. |

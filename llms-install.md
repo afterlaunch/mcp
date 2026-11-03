@@ -80,4 +80,4 @@ the live address once it is live), read your moves with `list_feed` and
 `get_move` before improvising, act on moves with `ship_move` / `skip_move` /
 `undo_move` / `update_draft` / `archive_move`, write what you learn back with
 `record_insight`, and confirm with the founder before any tool that spends
-money (`refresh_scan`, `replenish_feed`, `run_loop`).
+money (`refresh_scan`, `replenish_feed`).

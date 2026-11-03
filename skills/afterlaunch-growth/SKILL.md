@@ -218,8 +218,9 @@ prepared backlog turns into shipped work.
 ## Step 5: the tools that spend money
 
 These generate new paid work. **Confirm with the founder before calling any of
-them.** They need the `write` scope, which AfterLaunch issues; a self-serve key
-does not carry it, so a refusal here is a scope refusal, not a bug. Each needs
+them.** They need the `write` scope, which every key minted on Connect your AI
+or by the onboarding flow carries; a refusal here is a scope or credit refusal,
+not a bug. Each needs
 an `idempotency_key` you mint, and you reuse the same key on a retry so a repeat
 never double-charges.
 
@@ -227,22 +228,11 @@ never double-charges.
   per product per local day; a repeat that day replays the original result.
 - `replenish_feed`: generates a fresh batch of growth moves. Once a day per
   product.
-- `run_loop`: runs one loop's generation. One run per loop per cycle; a
-  same-cycle repeat replays at no cost.
 
 **When the founder is out of credits or hits a Founder-tier-only action:** call
 `create_checkout`. It returns a checkout link bound to this product run, and the
 founder completes payment themselves. Never present it as a purchase you have
 made.
-
----
-
-## Autonomy and cadence (Founder tier)
-
-`set_loop_autonomy` and `set_loop_cadence` change how the engine behaves. Both
-need the `config` scope AND Founder tier. Social and distribution channels never
-accept `autonomous`: they are review-and-post by a human. You can slow or pause
-a loop, never speed it up past its default.
 
 ---
 
