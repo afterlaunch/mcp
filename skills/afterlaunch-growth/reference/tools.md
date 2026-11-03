@@ -38,7 +38,7 @@ and replayed rather than rerun on a repeat.
 | `get_loop_status` | The automated loops provisioned for this product and their autonomy. |
 | `list_outputs` / `get_output` | The drafted channel and distribution content, and any one body by id. |
 | `list_kb_pages` / `get_kb_page` | The Memory pages the engine drafts from, and any one body by slug. |
-| `list_tracked_prompts` | The customer questions every AI visibility measurement is taken against (15 included, up to 50 on the Founder plan). |
+| `list_tracked_prompts` | The customer questions every AI visibility measurement is taken against (up to 50 tracked questions on the Founder plan). |
 | `list_connections` | Which data sources and channels are connected (GA4, Search Console, Google Business Profile, LinkedIn, Reddit), each with an honest state. |
 | `poll_connection` | Did the founder finish a connection you handed them a link for? |
 | `get_setup_snippet` | The paste-able "Growth (AfterLaunch)" section for a repository's CLAUDE.md or AGENTS.md. |
