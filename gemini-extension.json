@@ -1,0 +1,21 @@
+{
+  "name": "afterlaunch",
+  "version": "1.0.1",
+  "description": "The growth record and next move for your product: what the answer engines say about it, what shipped and what it moved, and the next growth move, ranked and briefed.",
+  "mcpServers": {
+    "afterlaunch": {
+      "httpUrl": "https://afterlaunch.io/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${AFTERLAUNCH_API_KEY}"
+      }
+    }
+  },
+  "settings": [
+    {
+      "name": "AfterLaunch API key",
+      "description": "Bearer key from npx afterlaunch connect or https://afterlaunch.io/app/connect#keys",
+      "envVar": "AFTERLAUNCH_API_KEY",
+      "sensitive": true
+    }
+  ]
+}

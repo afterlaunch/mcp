@@ -1,0 +1,13 @@
+{
+  "identifier": "afterlaunch",
+  "name": "AfterLaunch",
+  "version": "1.0.1",
+  "description": "The growth record and next move for your product: what ChatGPT, Gemini, Google AI Overviews and Perplexity say about it, what shipped and what it moved, and the next growth move, ranked and briefed.",
+  "author": "AfterLaunch",
+  "authorUrl": "https://afterlaunch.io",
+  "homepage": "https://afterlaunch.io/agents/always-on",
+  "cloudEndpoint": "https://afterlaunch.io/api/mcp",
+  "icon": "https://afterlaunch.io/brand/icon-512.png",
+  "category": "productivity",
+  "tags": ["growth-marketing", "seo", "ai-visibility", "geo", "marketing", "always-on-agents"]
+}

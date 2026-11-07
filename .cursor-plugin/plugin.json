@@ -1,14 +1,14 @@
 {
   "name": "afterlaunch-growth",
-  "version": "1.0.0",
-  "description": "Growth marketing, SEO and AI answer-engine visibility (GEO) for your product, run through AfterLaunch over MCP, with skills that teach an agent to read the ranked Feed and ship prepared moves.",
+  "version": "1.1.0",
+  "description": "The growth record and next move for your product, run through AfterLaunch over MCP: what ChatGPT, Gemini, Google AI Overviews and Perplexity say about it, what shipped and what it moved, and the next move, ranked and briefed. Skills teach the agent to read the ranked Feed and ship prepared moves, and the same server runs from an always-on agent on a schedule with a human yes before anything ships.",
   "author": {
     "name": "AfterLaunch"
   },
-  "homepage": "https://afterlaunch.io",
+  "homepage": "https://afterlaunch.io/agents",
   "repository": "https://github.com/afterlaunch/mcp",
   "license": "MIT",
-  "keywords": ["marketing", "seo", "geo", "ai-visibility", "growth", "mcp"],
+  "keywords": ["marketing", "seo", "geo", "ai-visibility", "growth", "mcp", "always-on"],
   "logo": "assets/logo-400.png",
   "variables": {
     "type": "object",

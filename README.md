@@ -121,6 +121,26 @@ Cursor expands the placeholder from your shell, so set `AFTERLAUNCH_API_KEY` bef
 
 The onboarding guide at [afterlaunch.io/agents/onboard.md](https://afterlaunch.io/agents/onboard.md) carries the exact command or config for VS Code, Windsurf, Gemini CLI and Cline too, and says which have been checked. It is written for an AI to read, so you can also just tell your agent to follow it. No account yet? An agent that can run commands can start one for you: it sends your site address and email, you approve one email, and the key is handed over once. The steps are in that same guide.
 
+### Always-on agents
+
+An agent that runs on a schedule (OpenClaw, Hermes Agent, a Claude scheduled task, the Claude Agent SDK) uses the same server and the same key. Each morning it calls `get_standup` and relays the screen to you in its own chat channel, Telegram, Slack or wherever you talk to it. When you name a move, it accepts it, wins the job with `pick_up_job`, asks at most one question through `report_job`, and reports the move shipped with its live address only after you have said yes to publishing it.
+
+The standing orders for that agent are served raw, so one line prints them:
+
+```sh
+curl https://afterlaunch.io/agents/always-on.md
+```
+
+Paste them where your runtime keeps its standing instructions. The per-runtime connect lines, scheduler lines and where each one keeps its orders are at [afterlaunch.io/agents/always-on](https://afterlaunch.io/agents/always-on).
+
+### Gemini CLI
+
+```sh
+gemini extensions install https://github.com/afterlaunch/mcp
+```
+
+Gemini CLI asks for your AfterLaunch API key and keeps it in the system keychain. It sends it only as the bearer header to `https://afterlaunch.io/api/mcp`.
+
 ## Tools
 
 58 tools. The live catalogue with exact input schemas is `tools/list` on connection, and the one-page reference in this repository is [`skills/afterlaunch-growth/reference/tools.md`](skills/afterlaunch-growth/reference/tools.md).
@@ -279,6 +299,7 @@ No. It drafts, and a person approves and posts. A self-serve key has no permissi
 - [afterlaunch.io](https://afterlaunch.io)
 - [Developers page and API reference](https://afterlaunch.io/developers)
 - [Agent setup guide, per client](https://afterlaunch.io/agents/onboard.md)
+- [Always-on agents](https://afterlaunch.io/agents/always-on)
 - [llms.txt](https://afterlaunch.io/llms.txt)
 - [OpenAPI description](https://afterlaunch.io/api/v1/openapi.json)
 - [MCP discovery descriptor](https://afterlaunch.io/.well-known/mcp.json)
@@ -300,6 +321,8 @@ Read it, then paste it into your file yourself. Nothing writes to your files on 
 - `.claude-plugin/`: the Claude plugin marketplace and plugin manifests.
 - `.mcp.json`: the Claude plugin's server config (URL plus bearer header filled from the key you enter when you enable the plugin).
 - `.cursor-plugin/plugin.json` and `mcp.json`: the Cursor plugin manifest and its server config (URL plus bearer header filled from the `AFTERLAUNCH_API_KEY` variable).
+- `gemini-extension.json`: the Gemini CLI extension manifest (URL plus bearer header filled from the `AFTERLAUNCH_API_KEY` setting).
+- `lhm.plugin.json`: the LobeHub market listing manifest.
 - `skills/afterlaunch-growth/`: the skill and its one-page tool reference.
 - `skills/roughen/` and `skills/findable/`: two skills copied from [afterlaunch/skills](https://github.com/afterlaunch/skills).
 - `THIRD_PARTY.md`: the notices for the MIT work `roughen` adapts.
